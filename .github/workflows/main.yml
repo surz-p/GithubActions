@@ -1,5 +1,5 @@
 name: Generate RSS Podcast Feed
-on: [push]
+on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest

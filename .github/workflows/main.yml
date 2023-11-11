@@ -1,0 +1,26 @@
+name: Generate RSS Podcast Feed
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+      - name: Run RSS Feed Generator
+        run: python feed.py
+      - name: Push Repository
+        run: |
+          git config user.name "Suraj P"
+          git config user.email "surajperumallapalli97@gmail.com"
+          git add .
+          git commit -m "chore(github-action): generate and push RSS feed"
+          git push
+          

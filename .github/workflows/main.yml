@@ -20,7 +20,12 @@ jobs:
         run: |
           git config user.name "Suraj P"
           git config user.email "surajperumallapalli97@gmail.com"
-          git add .
-          git commit -m "chore(github-action): generate and push RSS feed"
-          git push
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "chore(github-action): generate and push RSS feed"
+            git push
+          else
+            echo "Nothing to commit, working tree clean. Skipping push."
+            exit 0;
+          fi
 
